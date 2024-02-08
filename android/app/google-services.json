@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "149808937076",
+    "project_id": "plantsility",
+    "storage_bucket": "plantsility.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149808937076:android:8c69f7d91b98de1dbb3921",
+        "android_client_info": {
+          "package_name": "com.plantcity.plantsility"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdaNQ47mj_i_O9MXjnaSxXXVyWRM6Q_Sw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
