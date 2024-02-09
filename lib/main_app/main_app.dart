@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:plantsility_app/models/user.dart';
+import 'package:plantsility_app/services/auth.dart';
+
 import 'package:plantsility_app/activities/authenticate.dart';
-import 'package:plantsility_app/activities/entrance/entrance.dart';
 
 
 // Main application class
@@ -10,16 +14,17 @@ class Plantsility extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: "Plantsility",
-      // TODO Add themes
-      // theme: lightTheme,
-      // darkTheme: darkTheme,
-      // TODO: change to app routes, instead of home page
-      home: Scaffold(
-        body: Center(
-          child: EnterScreen(),
-        ),
+    // wrap main app in StreamProvider to get access to user object throughout child widgets
+    return StreamProvider<UserModel?>.value(
+      initialData: null,
+      value: AuthService().user,
+      child: const MaterialApp(
+        title: "Plantsility",
+        // TODO Add themes
+        // theme: lightTheme,
+        // darkTheme: darkTheme,
+        // TODO: change to app routes, instead of home page
+        home: Authenticate(),
       ),
     );
   }

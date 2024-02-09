@@ -40,4 +40,15 @@ class AuthService {
   // sign up with email
 
   // sign out
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    }
+    catch(error) {
+      // Catching error in DEBUG
+      // TODO remove in release
+      debugPrint(error.toString());
+      return null;
+    }
+  }
 }
