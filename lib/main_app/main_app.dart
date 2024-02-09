@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:plantsility_app/activities/authenticate.dart';
+import 'package:plantsility_app/activities/entrance/entrance.dart';
+
 
 // Main application class
 class Plantsility extends StatelessWidget {
@@ -7,17 +10,15 @@ class Plantsility extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: "Plantsility",
-      // Add themes
-      // theme: ,
+      // TODO Add themes
+      // theme: lightTheme,
+      // darkTheme: darkTheme,
       // TODO: change to app routes, instead of home page
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Plantsility"),
-        ),
-        body: const Center(
-          child: Text("Title"),
+        body: Center(
+          child: EnterScreen(),
         ),
       ),
     );
