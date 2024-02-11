@@ -1,0 +1,10 @@
+Row(
+children: [
+  TextButton(onPressed: () {
+    Plantsility.of(context).changeTheme(ThemeMode.light);
+  }, child: const Text('light')),
+  TextButton(onPressed: () {
+    Plantsility.of(context).changeTheme(ThemeMode.dark);
+  }, child: const Text('light'))
+],
+),

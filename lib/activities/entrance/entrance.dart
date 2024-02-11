@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:plantsility_app/widgets/buttons/rounded_rect_button.dart';
+
 import 'package:plantsility_app/activities/entrance/login/sign_in.dart';
+import 'package:plantsility_app/activities/entrance/registration/registration.dart';
 
 
 class Entrance extends StatelessWidget {
@@ -7,9 +11,8 @@ class Entrance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Row(
+    return Scaffold(
+      body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Column(
@@ -17,37 +20,24 @@ class Entrance extends StatelessWidget {
             children: [
               const Padding(padding: EdgeInsets.only(top: 180)),
 
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "Explore new \nteam collaboration \nexperience",
-                    // TODO create custom big label text theme
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.w600,
-                        fontSize: 32,
-                        color: Colors.black,
-                        decoration: TextDecoration.none),
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ],
               ),
 
               const Padding(padding: EdgeInsets.only(bottom: 32)),
 
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "Keep your files, documents, tools \nin one place.",
-                    // TODO create custom medium label text theme
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                        color: Color.fromARGB(255, 104, 103, 119),
-                        decoration: TextDecoration.none,
-                        height: 1.5),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ],
               ),
@@ -55,19 +45,13 @@ class Entrance extends StatelessWidget {
 
               const Padding(padding: EdgeInsets.only(bottom: 12)),
 
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "Communicate with your team and set "
                         "\nup business processes and goals \nthrough the mobile and web application.",
-                    // TODO create custom medium label text theme
-                    style: TextStyle(fontFamily: "Poppins",
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                        color: Color.fromARGB(255, 104, 103, 119),
-                        decoration: TextDecoration.none,
-                        height: 1.5),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ],
               ),
@@ -77,37 +61,32 @@ class Entrance extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: 164,
-                    height: 56,
-                    child: FilledButton(onPressed: () {
-                      Navigator.pushNamed(context, '/sign-up');
+                  RoundedRectButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SignUp()));
                     },
-                      // TODO create roundedRect button theme
-                      style: FilledButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 44, 94, 70),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-                      child: const Text("Sign Up", style: TextStyle(fontFamily: "Poppins"),),),
+                    text: Text(
+                      "Sign Up",
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white),
+                    )
                   ),
 
                   const Padding(padding: EdgeInsets.only(right: 8)),
 
-                  SizedBox(
-                    width: 164,
-                    height: 56,
-                    child: FilledButton(onPressed: () {
-                      // Navigator.pushNamed(context, '/sign-in');
+                  RoundedRectButton(
+                    onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const SignIn()),
                       );
                     },
-                        // TODO create roundedRect button theme
-                        style: FilledButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 248, 250, 250),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        ),
-                        child: const Text("Sign In", style: TextStyle(color: Colors.black, fontFamily: "Poppins"),)),
+                    text: Text(
+                      "Sign In",
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    color: const Color.fromARGB(255, 248, 250, 250),
                   )
                 ],
               )

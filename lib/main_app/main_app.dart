@@ -7,10 +7,26 @@ import 'package:plantsility_app/services/auth.dart';
 
 import 'package:plantsility_app/activities/authenticate.dart';
 
+import '../themes/light_theme.dart';
+
 
 // Main application class
-class Plantsility extends StatelessWidget {
+class Plantsility extends StatefulWidget {
   const Plantsility({super.key});
+
+  @override
+  State<Plantsility> createState() => _PlantsilityState();
+
+  // Make access to State object for any descendant widget
+  // ignore: library_private_types_in_public_api
+  static _PlantsilityState of(BuildContext context)
+  => context.findAncestorStateOfType<_PlantsilityState>()!;
+}
+
+class _PlantsilityState extends State<Plantsility> {
+
+  // Variable to control current theme
+  ThemeMode _themeMode = ThemeMode.system;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +34,22 @@ class Plantsility extends StatelessWidget {
     return StreamProvider<UserModel?>.value(
       initialData: null,
       value: AuthService().user,
-      child: const MaterialApp(
+      child: MaterialApp(
         title: "Plantsility",
         // TODO Add themes
-        // theme: lightTheme,
+        theme: lightTheme,
         // darkTheme: darkTheme,
+        themeMode: _themeMode,
         // TODO: change to app routes, instead of home page
-        home: Authenticate(),
+        home: const Authenticate(),
       ),
     );
+  }
+
+  // Change app theme from light to dark and vice versa
+  void changeTheme(ThemeMode themeMode) {
+    setState(() {
+      _themeMode = themeMode;
+    });
   }
 }

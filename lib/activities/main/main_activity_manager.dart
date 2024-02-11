@@ -15,6 +15,7 @@ class _MainActivityManagerState extends State<MainActivityManager> {
   // All app screens/activities
   static List<Widget> pages = <Widget>[
       const Shop(),
+      const Placeholder(),
     ];
 
   // bottom bar icons
@@ -39,7 +40,7 @@ class _MainActivityManagerState extends State<MainActivityManager> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: const Color.fromARGB(255, 44, 94, 70),
+        selectedItemColor: const  Color.fromARGB(255, 44, 94, 70),
         selectedIconTheme: const IconThemeData(
             color: Color.fromARGB(255, 44, 94, 70)
         ),
