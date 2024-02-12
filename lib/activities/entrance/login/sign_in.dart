@@ -15,9 +15,13 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   String email = '';
   String password = '';
+
+  // If sign in completed with error show this message
+  String error = "";
 
   // Sign in as guest
   void _signInAnonymously() async {
@@ -57,67 +61,101 @@ class _SignInState extends State<SignIn> {
 
             const Padding(padding: EdgeInsets.only(bottom: 58)),
 
-            Form(child: Column(
-              children: <Widget>[
-                const CustomTextField(
-                  hintText: "Email",
-                  label: "Email",
-                ),
-
-                const Padding(padding: EdgeInsets.only(bottom: 26)),
-
-                const CustomTextField(
-                  hintText: "Password",
-                  label: "Password",
-                  passwordField: true,
-                ),
-
-                const Padding(padding: EdgeInsets.only(bottom: 8)),
-
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Forgot your password?",
-                      style: Theme.of(context).textTheme.labelMedium,
-                    )
-                  ),
-                ),
-
-                const Padding(padding: EdgeInsets.only(bottom: 96)),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+            Form(
+              key: _formKey,
+              child: Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    const Text(
-                      "Don’t have an account?",
+                    Column(
+                      children: [
+                        CustomTextField(
+                          hintText: "Email",
+                          label: "Email",
+                          onChanged: (value) {
+                            setState(() {
+                              email = value;
+                            });
+                          },
+                        ),
+
+                        const Padding(padding: EdgeInsets.only(bottom: 26)),
+
+                        CustomTextField(
+                          hintText: "Password",
+                          label: "Password",
+                          passwordField: true,
+                          onChanged: (value) {
+                            setState(() {
+                              password = value;
+                            });
+                          },
+                        ),
+
+                        const Padding(padding: EdgeInsets.only(bottom: 8)),
+
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Forgot your password?",
+                                style: Theme.of(context).textTheme.labelMedium,
+                              )
+                          ),
+                        ),
+
+                        const Padding(padding: EdgeInsets.only(bottom: 12)),
+
+                        Text(error, style: const TextStyle(color: Colors.red),)
+                      ],
                     ),
-                    Container(
-                      color: const Color.fromARGB(255, 226, 227, 228),
-                      margin: const EdgeInsets.only(left: 24, right: 10),
-                      width: 2,
-                      height: 24,
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Register",
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                    ),
+
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            const Text(
+                              "Don’t have an account?",
+                            ),
+                            Container(
+                              color: const Color.fromARGB(255, 226, 227, 228),
+                              margin: const EdgeInsets.only(left: 24, right: 10),
+                              width: 2,
+                              height: 24,
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Register",
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        RoundedRectButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                dynamic response = await _auth.signIn(email, password);
+                                if (response == null) {
+                                  setState(() {
+                                    error = "Wrong email or password";
+                                  });
+                                }
+                              }
+                            },
+                            width: 328,
+                            text: const Text("Sign In")
+                        )
+                      ],
+                    )
+
                   ],
                 ),
-
-                const Padding(padding: EdgeInsets.only(bottom: 28)),
-
-                RoundedRectButton(
-                  onPressed: () {},
-                  width: 328,
-                  text: const Text("Sign In")
-                )
-              ],
-            ))
+              )
+            )
           ],
         )
       ),

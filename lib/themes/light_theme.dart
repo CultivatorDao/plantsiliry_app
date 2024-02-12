@@ -31,11 +31,17 @@ ThemeData lightTheme = ThemeData(
       height: 1.5,
       color: Color.fromARGB(255, 104, 103, 119)
     ),
+    displayMedium: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      color: Color.fromARGB(255, 44, 94, 70)
+    ),
     // temp!!!
     displaySmall: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w400,
-      height: 1.5
+      height: 1.5,
+      color: Color.fromARGB(255, 103, 104, 119)
     ),
     // Button textStyles
     labelLarge: TextStyle(

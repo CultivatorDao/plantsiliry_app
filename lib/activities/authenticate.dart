@@ -25,5 +25,6 @@ class Authenticate extends StatelessWidget {
     else {
       return const MainActivityManager();
     }
+
   }
 }

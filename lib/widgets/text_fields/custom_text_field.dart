@@ -27,6 +27,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
   String? _label = "";
   Function? _onChanged = (value) {};
 
+  // TODO modify to receive user condition and helper text
+  String? validateField(String? value) {
+    if (value!.isEmpty) {
+      return "";
+    }
+    else if (value.length < 8) {
+      return "";
+    }
+    else {
+      return null;
+    }
+  }
+
   @override
   void initState() {
     _passwordField = widget.passwordField ?? _passwordField;
@@ -35,7 +48,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
     _onChanged = widget.onChanged ?? _onChanged;
 
     showPassword = _passwordField! ? false : true;
-    debugPrint(showPassword.toString());
 
     super.initState();
   }
@@ -87,7 +99,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
           _onChanged!(value);
         });
       },
-
+      validator: (val) {
+        return validateField(val);
+      },
     );
   }
 }
