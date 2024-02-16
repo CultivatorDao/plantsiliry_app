@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:plantsility_app/services/auth.dart';
+
 import 'package:plantsility_app/widgets/buttons/rounded_rect_button.dart';
 import 'package:plantsility_app/widgets/text_fields/custom_text_field.dart';
-
+import 'package:plantsility_app/widgets/validator/validator.dart';
 
 class SignUp extends StatefulWidget {
+  /// Allows user to sign up new account.
   const SignUp({super.key});
 
   @override
@@ -13,9 +16,12 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
+  // Initialize authentication service object
   final AuthService _auth = AuthService();
+  // Set key for form validation
   final _formKey = GlobalKey<FormState>();
 
+  // Variables that stores values from form text fields
   String username = '';
   String email = '';
   String password = '';
@@ -39,6 +45,7 @@ class _SignUpState extends State<SignUp> {
         children: [
           Container(height: 1, color: const Color.fromARGB(255, 226, 227, 228),),
 
+          // Wrap Container with Expanded to be able to use MainAxisAlignment.spaceBetween
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
@@ -60,29 +67,33 @@ class _SignUpState extends State<SignUp> {
 
                       const Padding(padding: EdgeInsets.only(bottom: 24)),
 
+                      // Gets information about user account to register user account
                       Form(
                           key: _formKey,
                           child: Column(
                             children: <Widget>[
                               // CustomTextField(
                               //   label: "Username",
-                              //   hintText: "Username",
+                              //   hintText: "MegaUser",
                               //   onChanged: (value) {},
                               // ),
                               const Padding(padding: EdgeInsets.only(bottom: 10)),
                               CustomTextField(
                                 label: "Email",
-                                hintText: "Email",
+                                hintText: "email@mail.ru",
                                 onChanged: (value) {
                                   setState(() {
                                     email = value;
                                   });
                                 },
+                                validator: Validator(
+                                  isEmail: true,
+                                ),
                               ),
                               const Padding(padding: EdgeInsets.only(bottom: 10)),
                               CustomTextField(
                                 label: "Password",
-                                hintText: "Password",
+                                hintText: "qwerty123",
                                 onChanged: (value) {
                                   setState(() {
                                     password = value;
@@ -93,7 +104,7 @@ class _SignUpState extends State<SignUp> {
                               // const Padding(padding: EdgeInsets.only(bottom: 10)),
                               // CustomTextField(
                               //   label: "Repeat Password",
-                              //   hintText: "Repeat Password",
+                              //   hintText: "qwerty123",
                               //   onChanged: (value) {},
                               //   passwordField: true,
                               // ),
@@ -126,10 +137,16 @@ class _SignUpState extends State<SignUp> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               dynamic response = await _auth.signUp(email, password);
+                              // Checking if got valid response
                               if (response == null) {
                                 setState(() {
                                   error = "This email is already used or not valid";
                                 });
+                              }
+                              else {
+                                // Exit sign in page if successfully logged in
+                                // Ignore this warning
+                                Navigator.pop(context);
                               }
                             }
                           },

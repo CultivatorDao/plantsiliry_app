@@ -12,6 +12,7 @@ import '../themes/light_theme.dart';
 
 // Main application class
 class Plantsility extends StatefulWidget {
+  /// Main application class.
   const Plantsility({super.key});
 
   @override
@@ -28,6 +29,13 @@ class _PlantsilityState extends State<Plantsility> {
   // Variable to control current theme
   ThemeMode _themeMode = ThemeMode.system;
 
+  // Change app theme from light to dark and vice versa
+  void changeTheme(ThemeMode themeMode) {
+    setState(() {
+      _themeMode = themeMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // wrap main app in StreamProvider to get access to user object throughout child widgets
@@ -40,16 +48,8 @@ class _PlantsilityState extends State<Plantsility> {
         theme: lightTheme,
         // darkTheme: darkTheme,
         themeMode: _themeMode,
-        // TODO: change to app routes, instead of home page
         home: const Authenticate(),
       ),
     );
-  }
-
-  // Change app theme from light to dark and vice versa
-  void changeTheme(ThemeMode themeMode) {
-    setState(() {
-      _themeMode = themeMode;
-    });
   }
 }

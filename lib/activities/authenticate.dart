@@ -10,6 +10,10 @@ import 'package:plantsility_app/activities/main/main_activity_manager.dart';
 
 // When starting app checks if user was logged in
 class Authenticate extends StatelessWidget {
+  /// Transition screen, that checks is user logged in or not
+  ///
+  /// Return MainActivityManager if logged in.
+  /// Else return Login screen.
   const Authenticate({super.key});
 
   @override

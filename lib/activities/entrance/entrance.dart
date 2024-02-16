@@ -7,6 +7,7 @@ import 'package:plantsility_app/activities/entrance/registration/registration.da
 
 
 class Entrance extends StatelessWidget {
+  /// Welcome page, that allows user to register account or sign in into his account if he has one.
   const Entrance({super.key});
 
   @override
@@ -49,8 +50,9 @@ class Entrance extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Communicate with your team and set "
-                        "\nup business processes and goals \nthrough the mobile and web application.",
+                    "Communicate with your team and set \n"
+                    "up business processes and goals \n"
+                    "through the mobile and web application.",
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ],

@@ -4,6 +4,9 @@ import 'package:plantsility_app/models/user.dart';
 
 
 class AuthService {
+  /// Main authentication class.
+  ///
+  /// Responsible for all authentication operations with FireBase Authentication service.
 
   // Initialize firebase auth instance
   // for all authentication operations

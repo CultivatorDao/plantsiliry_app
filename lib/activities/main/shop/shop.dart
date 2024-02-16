@@ -3,6 +3,7 @@ import 'package:plantsility_app/services/auth.dart';
 
 
 class Shop extends StatefulWidget {
+  /// Contains cards of all company selling products.
   const Shop({super.key});
 
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-
 class RoundedRectButton extends StatefulWidget {
+  /// Creates rectangular button with rounded corners.
   const RoundedRectButton({super.key,
     required this.onPressed,
     required this.text,
@@ -10,10 +10,16 @@ class RoundedRectButton extends StatefulWidget {
     this.color
   });
 
+
+  /// [onPressed] Called when button pressed.
   final Function onPressed;
+  /// [text] Text that describes what button is doing.
   final Text text;
+  /// [height] Optional parameter that adjusts button height.
   final double? height;
+  /// [width] Optional parameter that adjusts button width.
   final double? width;
+  /// [color] Optional parameter that defines button background color.
   final Color? color;
 
   @override
@@ -45,6 +51,7 @@ class _RoundedRectButtonState extends State<RoundedRectButton> {
       height: _height,
       width: _width,
       child: FilledButton(
+        // Call user defined onPressed function here
         onPressed: () {
           _onPressed!();
         },

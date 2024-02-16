@@ -4,6 +4,9 @@ import 'package:plantsility_app/activities/main/shop/shop.dart';
 
 // Widget for navigation through app main screens
 class MainActivityManager extends StatefulWidget {
+  /// Contains all application activities, such as Shop, Encyclopedia, Profile and etc.
+  ///
+  /// Allows user to navigate between them.
   const MainActivityManager({super.key});
 
   @override

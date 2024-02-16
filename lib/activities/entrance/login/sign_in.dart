@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:plantsility_app/services/auth.dart';
+
 import 'package:plantsility_app/widgets/buttons/rounded_rect_button.dart';
 import 'package:plantsility_app/widgets/text_fields/custom_text_field.dart';
+import 'package:plantsility_app/widgets/validator/validator.dart';
+
+import 'package:plantsility_app/activities/entrance/registration/registration.dart';
 
 
 class SignIn extends StatefulWidget {
+  /// Allows user to sign in in his account.
   const SignIn({super.key});
 
   @override
@@ -14,9 +19,12 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
+  // Initialize authenticate service object
   final AuthService _auth = AuthService();
+  // Set key for form validation
   final _formKey = GlobalKey<FormState>();
 
+  // Variables that stores values from form text fields
   String email = '';
   String password = '';
 
@@ -61,8 +69,10 @@ class _SignInState extends State<SignIn> {
 
             const Padding(padding: EdgeInsets.only(bottom: 58)),
 
+            // Gets user email and password to authenticate user
             Form(
               key: _formKey,
+              // Wrap Column with Expanded to be able to use MainAxisAlignment.spaceBetween
               child: Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,19 +80,22 @@ class _SignInState extends State<SignIn> {
                     Column(
                       children: [
                         CustomTextField(
-                          hintText: "Email",
+                          hintText: "email@mail.ru",
                           label: "Email",
                           onChanged: (value) {
                             setState(() {
                               email = value;
                             });
                           },
+                          validator: Validator(
+                            isEmail: true,
+                          ),
                         ),
 
                         const Padding(padding: EdgeInsets.only(bottom: 26)),
 
                         CustomTextField(
-                          hintText: "Password",
+                          hintText: "qwerty123",
                           label: "Password",
                           passwordField: true,
                           onChanged: (value) {
@@ -97,11 +110,12 @@ class _SignInState extends State<SignIn> {
                         Container(
                           alignment: Alignment.centerLeft,
                           child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "Forgot your password?",
-                                style: Theme.of(context).textTheme.labelMedium,
-                              )
+                            // TODO: add activity to restore account password
+                            onPressed: () {},
+                            child: Text(
+                              "Forgot your password?",
+                              style: Theme.of(context).textTheme.labelMedium,
+                            )
                           ),
                         ),
 
@@ -126,7 +140,11 @@ class _SignInState extends State<SignIn> {
                               height: 24,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => const SignUp()));
+                              },
                               child: Text(
                                 "Register",
                                 style: Theme.of(context).textTheme.labelMedium,
@@ -139,10 +157,16 @@ class _SignInState extends State<SignIn> {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 dynamic response = await _auth.signIn(email, password);
+                                // Checking if got valid response
                                 if (response == null) {
                                   setState(() {
                                     error = "Wrong email or password";
                                   });
+                                }
+                                else {
+                                  // Exit sign in page if successfully logged in
+                                  // Ignore this warning
+                                  Navigator.pop(context);
                                 }
                               }
                             },
