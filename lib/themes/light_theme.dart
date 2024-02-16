@@ -17,6 +17,12 @@ ThemeData lightTheme = ThemeData(
       decoration: TextDecoration.none,
       color: Color.fromARGB(255, 104, 103, 119)
     ),
+    titleLarge: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+      color: Color.fromARGB(255, 44, 94, 70),
+      height: 1.5
+    ),
     // Bold text style
     titleMedium: TextStyle(
       fontSize: 16,
@@ -54,6 +60,14 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.w600,
       height: 1.5,
       color: Color.fromARGB(255, 44, 94, 70),
+    )
+  ),
+  iconTheme: const IconThemeData(
+    color: Color.fromARGB(255, 44, 94, 70),
+  ),
+  iconButtonTheme: IconButtonThemeData(
+    style: IconButton.styleFrom(
+        foregroundColor: const Color.fromARGB(255, 44, 94, 70)
     )
   ),
   splashColor: Colors.transparent,
