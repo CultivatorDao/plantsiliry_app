@@ -6,7 +6,7 @@ import 'package:plantsility_app/activities/main/shop/product.dart';
 
 Map<String, String> info = {
   "name": "Peperomia Houseplant",
-  "image": "https://growfully.com/wp-content/uploads/2021/06/peperomia-in-pot.jpg"
+  "image": "https://growfully.com/wp-content/uploads/2021/06/peperomia-in-pot.jpg",
 };
 
 

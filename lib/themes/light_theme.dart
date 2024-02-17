@@ -37,6 +37,11 @@ ThemeData lightTheme = ThemeData(
       height: 1.5,
       color: Color.fromARGB(255, 104, 103, 119)
     ),
+    displayLarge: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w400,
+      color: Color.fromARGB(255, 54, 53, 74)
+    ),
     displayMedium: TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w600,

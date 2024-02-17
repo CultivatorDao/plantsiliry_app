@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 
 class InformationCard extends StatefulWidget {
+  /// Contains basic information about subject.
+  ///
+  /// Transition between shop and subject screen.
   const InformationCard(
       {
         super.key,
@@ -61,11 +64,12 @@ class _InformationCardState extends State<InformationCard> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 width: 154,
-                height: 196,
-                child: Image.network(_image!)
+                height: 176,
+                child: Image.network(_image!, scale: 0.8,)
               ),
               Container(
                 padding: const EdgeInsets.only(left: 7, top: 2),
