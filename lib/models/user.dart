@@ -1,7 +1,17 @@
 class UserModel {
-  /// Custom user model to get rid of unnecessary information
+  /// Custom user model, contains user unique id.
 
   final String uid;
+
+  UserModel({
+    required this.uid,
+    });
+
+}
+
+
+class UserDataModel {
+  /// Custom user data model, contains all user information.
 
   final String? username;
   final String? firstName;
@@ -10,14 +20,14 @@ class UserModel {
   final String? phoneNumber;
   final List? favorite;
 
-  UserModel({
-    required this.uid,
+  UserDataModel({
     this.username = "no_one_knows",
     this.firstName = "No-one",
     this.lastName = "Knows",
     this.email = "knows@mail.com",
     this.phoneNumber = "123456789",
     this.favorite = const []
-    });
+  });
+
 
 }

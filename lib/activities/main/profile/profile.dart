@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantsility_app/activities/main/profile/settings.dart';
 
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
 
 
-    return StreamProvider<List<UserModel>?>.value(
+    return StreamProvider<List<UserDataModel>?>.value(
       value: DatabaseService().users,
       initialData: null,
       child: Scaffold(
@@ -41,13 +42,19 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
   @override
   Widget build(BuildContext context) {
 
-    final users = Provider.of<List<UserModel>?>(context);
+    final users = Provider.of<List<UserDataModel>?>(context);
     if (users != null) {
       for (var element in users) {
         debugPrint(element.username);
       }
     }
 
-    return const Text("Hus");
+    return Column(
+      children: [
+        TextButton(onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingScreen()));
+        }, child: const Text("Settings"))
+      ],
+    );
   }
 }

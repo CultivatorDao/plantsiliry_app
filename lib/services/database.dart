@@ -23,7 +23,7 @@ class DatabaseService {
   // final CollectionReference _plantCollection = FirebaseFirestore.instance.collection("plants");
 
   // update user data
-  Future updateUserData(UserModel userData) async {
+  Future updateUserData(UserDataModel userData) async {
     return await _userCollection.doc(uid).set(
       {
         "username": userData.username,
@@ -37,10 +37,9 @@ class DatabaseService {
   }
 
   // user list from snapshot
-  List<UserModel> _userListFromSnapshot(QuerySnapshot snapshot) {
+  List<UserDataModel> _userListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-        return UserModel(
-          uid: doc.id,
+        return UserDataModel(
           username: doc.get("username") ?? '',
           firstName: doc.get("first_name") ?? '',
           lastName: doc.get("last_name") ?? '',
@@ -52,9 +51,27 @@ class DatabaseService {
     ).toList();
   }
 
+  // user data from snapshot
+  UserDataModel _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return UserDataModel(
+      username: snapshot.get("username"),
+      firstName: snapshot.get("first_name"),
+      lastName: snapshot.get("last_name"),
+      email: snapshot.get("email"),
+      phoneNumber: snapshot.get("phone_number"),
+      favorite: snapshot.get("favorite"),
+    );
+  }
+
+  // TODO: change user stream to product stream
   // get user stream
-  Stream<List<UserModel>> get users {
+  Stream<List<UserDataModel>> get users {
     return _userCollection.snapshots().map(_userListFromSnapshot);
+  }
+
+  // get user doc stream
+  Stream<UserDataModel> get userData {
+    return _userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
   }
 
 }
