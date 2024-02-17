@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantsility_app/services/auth.dart';
 
 import 'package:plantsility_app/widgets/info_card/info_card.dart';
 import 'package:plantsility_app/activities/main/shop/product.dart';
@@ -20,6 +21,8 @@ class Shop extends StatefulWidget {
 
 class _ShopState extends State<Shop> {
 
+  final AuthService _auth = AuthService();
+
   // TODO implement function that gets information from FireBase as List and return List of Information Cards
   List<Widget> createProductList(List data) {
     List<Widget> productList = [];
@@ -38,7 +41,9 @@ class _ShopState extends State<Shop> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark)),
+          IconButton(onPressed: () async {
+            await _auth.signOut();
+          }, icon: const Icon(Icons.bookmark)),
           IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz_rounded))
         ],
       ),

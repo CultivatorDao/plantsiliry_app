@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantsility_app/activities/main/profile/profile.dart';
 import 'package:plantsility_app/activities/main/shop/shop.dart';
 
 
@@ -19,6 +20,7 @@ class _MainActivityManagerState extends State<MainActivityManager> {
   static List<Widget> pages = <Widget>[
       const Shop(),
       const Placeholder(),
+      const ProfileScreen(),
     ];
 
   // bottom bar icons
@@ -26,7 +28,7 @@ class _MainActivityManagerState extends State<MainActivityManager> {
     BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: "Shop"),
     BottomNavigationBarItem(icon: Icon(Icons.settings_overscan), label: "Scanner"),
     // BottomNavigationBarItem(icon: Icon(Icons.book_outlined), label: "Encyclopedia"),
-    // BottomNavigationBarItem(icon: Icon(Icons.person_outlined), label: "Profile"),
+    BottomNavigationBarItem(icon: Icon(Icons.person_outlined), label: "Profile"),
   ];
 
   // defines current page
