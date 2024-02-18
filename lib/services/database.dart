@@ -54,12 +54,12 @@ class DatabaseService {
   // user data from snapshot
   UserDataModel _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserDataModel(
-      username: snapshot.get("username"),
-      firstName: snapshot.get("first_name"),
-      lastName: snapshot.get("last_name"),
-      email: snapshot.get("email"),
-      phoneNumber: snapshot.get("phone_number"),
-      favorite: snapshot.get("favorite"),
+      username: snapshot.get("username") ?? '',
+      firstName: snapshot.get("first_name") ?? '',
+      lastName: snapshot.get("last_name") ?? '',
+      email: snapshot.get("email") ?? '',
+      phoneNumber: snapshot.get("phone_number") ?? '',
+      favorite: snapshot.get("favorite") ?? const [],
     );
   }
 

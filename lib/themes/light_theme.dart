@@ -65,7 +65,7 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.w600,
       height: 1.5,
       color: Color.fromARGB(255, 44, 94, 70),
-    )
+    ),
   ),
   iconTheme: const IconThemeData(
     color: Color.fromARGB(255, 44, 94, 70),
