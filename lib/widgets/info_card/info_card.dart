@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:plantsility_app/models/product.dart';
+
 
 class InformationCard extends StatefulWidget {
   /// Contains basic information about subject.
@@ -14,8 +16,7 @@ class InformationCard extends StatefulWidget {
     );
 
   /// [obj] Class that contains all information about object of this card.
-  // TODO define specialized class for obj
-  final dynamic obj;
+  final ProductModel? obj;
   /// [objPage] Widget that will be shown when card button is pressed.
   final Widget? objPage;
 
@@ -25,26 +26,27 @@ class InformationCard extends StatefulWidget {
 
 class _InformationCardState extends State<InformationCard> {
 
-  Map<String, String> _obj = {
-    "name": "Peperomia Houseplant",
-    "image": "https://growfully.com/wp-content/uploads/2021/06/peperomia-in-pot.jpg"
-  };
+  ProductModel? _obj = ProductModel(
+    name: "Peperomia Houseplant",
+    frontImage: "https://growfully.com/wp-content/uploads/2021/06/peperomia-in-pot.jpg"
+  );
   Widget? _objPage = const Placeholder();
-  String _name = "";
+  String _name = "Peperomia Houseplant";
   String? _image = "https://growfully.com/wp-content/uploads/2021/06/peperomia-in-pot.jpg";
 
   @override
   void initState() {
     _obj = widget.obj ?? _obj;
     _objPage = widget.objPage ?? _objPage;
-    _name = _obj["name"]!;
-    _image = _obj["image"]!;
+    _name = _obj!.name;
+    _image = _obj!.frontImage;
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       decoration:  BoxDecoration(
         boxShadow: [

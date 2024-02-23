@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:plantsility_app/activities/main/profile/circle_avatar_custom.dart';
-import 'package:plantsility_app/activities/main/profile/line_button.dart';
 
 import 'package:provider/provider.dart';
 
+import 'package:plantsility_app/services/auth.dart';
 import 'package:plantsility_app/services/database.dart';
 import 'package:plantsility_app/models/user.dart';
 
+import 'package:plantsility_app/activities/main/profile/line_button.dart';
+import 'package:plantsility_app/activities/main/profile/circle_avatar_custom.dart';
 import 'package:plantsility_app/widgets/loading/chasing_dots_loading.dart';
 
 import 'package:plantsility_app/activities/main/profile/settings.dart';
@@ -20,6 +21,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     
@@ -127,6 +131,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ],
                         ),
                       ),
+
+                      const Label(text: "Account"),
+
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
+                        child: Column(
+                          children: <Widget>[
+                            LineButton(
+                              text: "Log Out",
+                              leftIcon: Icons.logout_outlined,
+                              onTap: () {
+                                _auth.signOut();
+                              }
+                            )
+                          ],
+                        ),
+                      )
 
                     ],
                   )

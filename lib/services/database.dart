@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:plantsility_app/models/product.dart';
 
 import 'package:plantsility_app/models/user.dart';
 
@@ -19,7 +20,7 @@ class DatabaseService {
 
   // collection reference
   final CollectionReference _userCollection = FirebaseFirestore.instance.collection('users');
-  // final CollectionReference _productCollection = FirebaseFirestore.instance.collection("products");
+  final CollectionReference _productCollection = FirebaseFirestore.instance.collection("products");
   // final CollectionReference _plantCollection = FirebaseFirestore.instance.collection("plants");
 
   // update user data
@@ -36,16 +37,16 @@ class DatabaseService {
     );
   }
 
-  // user list from snapshot
-  List<UserDataModel> _userListFromSnapshot(QuerySnapshot snapshot) {
+  // product list from snapshot
+  List<ProductModel> _productListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-        return UserDataModel(
-          username: doc.get("username") ?? '',
-          firstName: doc.get("first_name") ?? '',
-          lastName: doc.get("last_name") ?? '',
-          email: doc.get("email") ?? '',
-          phoneNumber: doc.get("phone_number") ?? '',
-          favorite: doc.get("favorite") ?? const [],
+        return ProductModel(
+          name: doc.get("name") ?? '',
+          frontImage: doc.get("image"),
+          description: doc.get("description"),
+          originalPrice: doc.get("originalPrice"),
+          hasDiscount: doc.get("hasDiscount"),
+          discountPrice: doc.get("discountPrice")
         );
       }
     ).toList();
@@ -63,10 +64,9 @@ class DatabaseService {
     );
   }
 
-  // TODO: change user stream to product stream
-  // get user stream
-  Stream<List<UserDataModel>> get users {
-    return _userCollection.snapshots().map(_userListFromSnapshot);
+  // get product stream
+  Stream<List<ProductModel>> get products {
+    return _productCollection.snapshots().map(_productListFromSnapshot);
   }
 
   // get user doc stream

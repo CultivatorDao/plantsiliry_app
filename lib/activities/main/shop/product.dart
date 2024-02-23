@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:plantsility_app/activities/main/shop/comment.dart';
+
+import 'package:plantsility_app/models/product.dart';
 
 import 'package:plantsility_app/widgets/buttons/rounded_rect_button.dart';
+import 'package:plantsility_app/activities/main/shop/comment.dart';
 
 
 class ProductPage extends StatefulWidget {
@@ -12,7 +14,7 @@ class ProductPage extends StatefulWidget {
       }
     );
 
-  final dynamic obj;
+  final ProductModel obj;
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -24,10 +26,13 @@ class _ProductPageState extends State<ProductPage> {
   String _currentCategory = "";
 
   // basic variables: name, images, price, discount, description, comments, isBookmarked.
+  late ProductModel _obj;
 
   @override
   void initState() {
     _currentCategory = categories.first;
+
+    _obj = widget.obj;
 
     super.initState();
   }
@@ -91,7 +96,7 @@ class _ProductPageState extends State<ProductPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Lorem Ipsum",
+                        _obj.name,
                         style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           fontSize: 18
                         ),
@@ -102,12 +107,12 @@ class _ProductPageState extends State<ProductPage> {
                       Row(
                         children: <Widget>[
                           Text(
-                            "\$89.99",
+                            "\$${_obj.hasDiscount! ? _obj.discountPrice : _obj.originalPrice}",
                             style: Theme.of(context).textTheme.displayMedium,
                           ),
                           const Padding(padding: EdgeInsets.only(right: 8)),
                           Text(
-                            "\$89.99",
+                              _obj.hasDiscount! ? "" : "\$${_obj.originalPrice}",
                             style: Theme.of(context).textTheme.displayLarge!.copyWith(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -148,12 +153,7 @@ class _ProductPageState extends State<ProductPage> {
                       ),
                       const Padding(padding: EdgeInsets.only(bottom: 8)),
                       Text(
-                        "Continue the next evolution of speed with a racing shoe made to you help chase new goals and records."
-                        " The Nike ZoomX Vapor-fly Next% 2 builds on the model racers everywhere love."
-                        " It helps improve comfort and breathability with a redesigned upper."
-                        " From a 10K to a marathon, the 2 still has the responsive cushioning and secure support to push you towards your personal best."
-                        "\n\nColour Shown: Aurora Green/Chlorine Blue/Pale Ivory/Black"
-                        "\n\nStyle: CU4111-300",
+                        _obj.description.toString(),
                         style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,

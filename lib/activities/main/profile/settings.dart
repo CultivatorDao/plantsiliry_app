@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:plantsility_app/services/database.dart';
-import 'package:plantsility_app/activities/main/profile/circle_avatar_custom.dart';
 
 import 'package:provider/provider.dart';
 import 'package:plantsility_app/models/user.dart';
 
 import 'package:plantsility_app/widgets/buttons/rounded_rect_button.dart';
 import 'package:plantsility_app/widgets/text_fields/custom_text_field.dart';
+import 'package:plantsility_app/activities/main/profile/circle_avatar_custom.dart';
 import 'package:plantsility_app/widgets/loading/chasing_dots_loading.dart';
 
 

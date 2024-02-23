@@ -29,6 +29,7 @@ class CustomTextField extends StatefulWidget {
   final String? hintText;
   /// [label] Optional widget that describes the input field.
   final String? label;
+  // TODO: add doc strings
   ///
   final double? height;
   ///
