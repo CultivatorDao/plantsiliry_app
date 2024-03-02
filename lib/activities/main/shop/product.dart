@@ -61,6 +61,7 @@ class _ProductPageState extends State<ProductPage> {
                 height: 336,
                 child: Row(
                   //TODO: change to image widget
+                  // use StorageImage widget
                   children: [
                     Container(width: 375, height: 336, color: Colors.red,),
                     Container(width: 375, height: 336, color: Colors.red,),

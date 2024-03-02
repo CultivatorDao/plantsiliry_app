@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:plantsility_app/models/product.dart';
+
+import 'package:plantsility_app/services/storage.dart';
 
 import 'package:plantsility_app/models/user.dart';
+import 'package:plantsility_app/models/product.dart';
+import 'package:plantsility_app/models/plant.dart';
 
 
 class DatabaseService {
@@ -15,13 +18,15 @@ class DatabaseService {
     }
   );
 
+
   // user uid
   final String? uid;
+  final StorageService _storageService = StorageService();
 
   // collection reference
   final CollectionReference _userCollection = FirebaseFirestore.instance.collection('users');
   final CollectionReference _productCollection = FirebaseFirestore.instance.collection("products");
-  // final CollectionReference _plantCollection = FirebaseFirestore.instance.collection("plants");
+  final CollectionReference _plantCollection = FirebaseFirestore.instance.collection("plants");
 
   // update user data
   Future updateUserData(UserDataModel userData) async {
@@ -52,6 +57,18 @@ class DatabaseService {
     ).toList();
   }
 
+  // plant list from snapshot
+  List<PlantModel> _plantListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+        return PlantModel(
+          name: doc.get("name"),
+          category: doc.get("category"),
+          frontImage: "placeholder.png"
+        );
+      }
+    ).toList();
+  }
+
   // user data from snapshot
   UserDataModel _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserDataModel(
@@ -67,6 +84,11 @@ class DatabaseService {
   // get product stream
   Stream<List<ProductModel>> get products {
     return _productCollection.snapshots().map(_productListFromSnapshot);
+  }
+
+  // get plant stream
+  Stream<List<PlantModel>> get plants {
+    return _plantCollection.snapshots().map(_plantListFromSnapshot);
   }
 
   // get user doc stream

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:plantsility_app/services/storage.dart';
 import 'package:plantsility_app/models/product.dart';
 
 
@@ -16,7 +17,7 @@ class InformationCard extends StatefulWidget {
     );
 
   /// [obj] Class that contains all information about object of this card.
-  final ProductModel? obj;
+  final dynamic obj;
   /// [objPage] Widget that will be shown when card button is pressed.
   final Widget? objPage;
 
@@ -26,20 +27,16 @@ class InformationCard extends StatefulWidget {
 
 class _InformationCardState extends State<InformationCard> {
 
-  ProductModel? _obj = ProductModel(
+  dynamic _obj = ProductModel(
     name: "Peperomia Houseplant",
-    frontImage: "https://growfully.com/wp-content/uploads/2021/06/peperomia-in-pot.jpg"
+    frontImage: "shop/placeholder.png"
   );
   Widget? _objPage = const Placeholder();
-  String _name = "Peperomia Houseplant";
-  String? _image = "https://growfully.com/wp-content/uploads/2021/06/peperomia-in-pot.jpg";
 
   @override
   void initState() {
     _obj = widget.obj ?? _obj;
     _objPage = widget.objPage ?? _objPage;
-    _name = _obj!.name;
-    _image = _obj!.frontImage;
 
     super.initState();
   }
@@ -51,10 +48,10 @@ class _InformationCardState extends State<InformationCard> {
       decoration:  BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withOpacity(0.10),
             blurRadius: 52,
             spreadRadius: 0,
-            offset: const Offset(0, 20)
+            offset: const Offset(0, 40)
           )
         ]
       ),
@@ -71,7 +68,17 @@ class _InformationCardState extends State<InformationCard> {
               SizedBox(
                 width: 154,
                 height: 176,
-                child: Image.network(_image!, scale: 0.8,)
+                child: FutureBuilder(
+                  future: StorageService().downloadImage(_obj.frontImage),
+                  builder: (context, snapshot) {
+                    if (snapshot.data != null) {
+                      return Image.network(snapshot.data!, scale: 0.8,);
+                    }
+                    else {
+                      return const Placeholder();
+                    }
+                  }
+                )
               ),
               Container(
                 padding: const EdgeInsets.only(left: 7, top: 2),
@@ -81,7 +88,7 @@ class _InformationCardState extends State<InformationCard> {
                      SizedBox(
                       width: 90,
                       child: Text(
-                        _name,
+                        _obj.name,
                         maxLines: 2,
                         style: Theme.of(context).textTheme.displayMedium!.copyWith(
                           fontSize: 12
