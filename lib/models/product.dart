@@ -1,14 +1,6 @@
+import 'dart:ffi';
+
 class ProductModel {
-
-  final String name;
-  final String frontImage;
-  final String? description;
-  final List<String>? images;
-  final double? originalPrice;
-  final bool? hasDiscount;
-  final double? discountPrice;
-  final dynamic comments;
-
 
   ProductModel({
     required this.name,
@@ -20,5 +12,14 @@ class ProductModel {
     this.hasDiscount,
     this.comments,
   });
+
+  final String name;
+  final String frontImage;
+  final String? description;
+  final List? images;
+  final double? originalPrice;
+  final bool? hasDiscount;
+  final double? discountPrice;
+  final dynamic comments;
 
 }

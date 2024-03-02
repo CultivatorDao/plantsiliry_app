@@ -5,6 +5,8 @@ import 'package:plantsility_app/models/product.dart';
 import 'package:plantsility_app/widgets/buttons/rounded_rect_button.dart';
 import 'package:plantsility_app/activities/main/shop/comment.dart';
 
+import 'package:plantsility_app/widgets/image/storage_image.dart';
+
 
 class ProductPage extends StatefulWidget {
   const ProductPage(
@@ -25,7 +27,6 @@ class _ProductPageState extends State<ProductPage> {
   List<String> categories = <String>["MOST INTERESTING", "LATEST"];
   String _currentCategory = "";
 
-  // basic variables: name, images, price, discount, description, comments, isBookmarked.
   late ProductModel _obj;
 
   @override
@@ -37,7 +38,20 @@ class _ProductPageState extends State<ProductPage> {
     super.initState();
   }
 
-  // product data handler function
+  // create product images
+  List<StorageImage> createImageList() {
+    List<StorageImage> images = [];
+    for (String image in _obj.images!) {
+      images.add(
+        StorageImage(
+          src: image,
+          width: 375,
+          height: 336,
+        )
+      );
+    }
+    return images;
+  }
 
   // comments create function
 
@@ -45,6 +59,9 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    debugPrint(_obj.images.toString());
+
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -60,12 +77,7 @@ class _ProductPageState extends State<ProductPage> {
               child: SizedBox(
                 height: 336,
                 child: Row(
-                  //TODO: change to image widget
-                  // use StorageImage widget
-                  children: [
-                    Container(width: 375, height: 336, color: Colors.red,),
-                    Container(width: 375, height: 336, color: Colors.red,),
-                  ],
+                  children: createImageList(),
                 ),
               ),
             ),

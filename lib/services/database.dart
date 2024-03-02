@@ -51,7 +51,8 @@ class DatabaseService {
           description: doc.get("description"),
           originalPrice: doc.get("originalPrice"),
           hasDiscount: doc.get("hasDiscount"),
-          discountPrice: doc.get("discountPrice")
+          discountPrice: doc.get("discountPrice"),
+          images: doc.get("images"),
         );
       }
     ).toList();

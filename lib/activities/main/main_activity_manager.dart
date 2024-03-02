@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:plantsility_app/activities/main/profile/profile.dart';
+
 import 'package:plantsility_app/activities/main/shop/shop.dart';
+import 'package:plantsility_app/activities/main/encyclopedia/encyclopedia.dart';
+import 'package:plantsility_app/activities/main/profile/profile.dart';
 
 
 // Widget for navigation through app main screens
@@ -19,15 +21,15 @@ class _MainActivityManagerState extends State<MainActivityManager> {
   // All app screens/activities
   static List<Widget> pages = <Widget>[
       const Shop(),
-      const Placeholder(),
+      const EncyclopediaScreen(),
       const ProfileScreen(),
     ];
 
   // bottom bar icons
   final List<BottomNavigationBarItem> pageIcons = const <BottomNavigationBarItem>[
     BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: "Shop"),
-    BottomNavigationBarItem(icon: Icon(Icons.settings_overscan), label: "Scanner"),
-    // BottomNavigationBarItem(icon: Icon(Icons.book_outlined), label: "Encyclopedia"),
+    // BottomNavigationBarItem(icon: Icon(Icons.settings_overscan), label: "Scanner"),
+    BottomNavigationBarItem(icon: Icon(Icons.book_outlined), label: "Encyclopedia"),
     BottomNavigationBarItem(icon: Icon(Icons.person_outlined), label: "Profile"),
   ];
 

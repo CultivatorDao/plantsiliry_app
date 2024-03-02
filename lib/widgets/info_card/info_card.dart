@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:plantsility_app/services/storage.dart';
 import 'package:plantsility_app/models/product.dart';
+import 'package:plantsility_app/widgets/image/storage_image.dart';
 
 
 class InformationCard extends StatefulWidget {
@@ -29,7 +30,7 @@ class _InformationCardState extends State<InformationCard> {
 
   dynamic _obj = ProductModel(
     name: "Peperomia Houseplant",
-    frontImage: "shop/placeholder.png"
+    frontImage: "placeholder.png"
   );
   Widget? _objPage = const Placeholder();
 
@@ -65,21 +66,13 @@ class _InformationCardState extends State<InformationCard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
+              StorageImage(
+                src: _obj.frontImage,
+                imgScale: 0.8,
                 width: 154,
                 height: 176,
-                child: FutureBuilder(
-                  future: StorageService().downloadImage(_obj.frontImage),
-                  builder: (context, snapshot) {
-                    if (snapshot.data != null) {
-                      return Image.network(snapshot.data!, scale: 0.8,);
-                    }
-                    else {
-                      return const Placeholder();
-                    }
-                  }
-                )
               ),
+
               Container(
                 padding: const EdgeInsets.only(left: 7, top: 2),
                 child: Row(
