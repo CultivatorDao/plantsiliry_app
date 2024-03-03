@@ -33,6 +33,7 @@ class DatabaseService {
     return await _userCollection.doc(uid).set(
       {
         "username": userData.username,
+        "profile_photo": userData.profilePhoto,
         "first_name": userData.firstName,
         "last_name": userData.lastName,
         "email": userData.email,
@@ -74,6 +75,7 @@ class DatabaseService {
   UserDataModel _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserDataModel(
       username: snapshot.get("username") ?? '',
+      profilePhoto: snapshot.get("profile_photo"),
       firstName: snapshot.get("first_name") ?? '',
       lastName: snapshot.get("last_name") ?? '',
       email: snapshot.get("email") ?? '',

@@ -29,12 +29,11 @@ class CustomTextField extends StatefulWidget {
   final String? hintText;
   /// [label] Optional widget that describes the input field.
   final String? label;
-  // TODO: add doc strings
-  ///
+  /// [height] Set height of text field container widget.
   final double? height;
-  ///
+  /// [padding] Padding for text field content.
   final EdgeInsetsGeometry? padding;
-  ///
+  /// [fontSize] The size of fonts (in logical pixels) to use when painting the text.
   final double? fontSize;
   /// [onChanged] Called when the user initiates a change to the TextField's value: when they have inserted or deleted text or reset the form.
   final Function? onChanged;
@@ -60,18 +59,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Function? _onChanged = (value) {};
   Validator? _validator = Validator();
 
-  // TODO modify to receive user condition and helper text
-  String? validateField(String? value) {
-    if (value!.isEmpty) {
-      return "";
-    }
-    else if (value.length < 8) {
-      return "";
-    }
-    else {
-      return null;
-    }
-  }
 
   @override
   void initState() {
@@ -146,6 +133,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
           });
         },
         validator: (val) {
+          // TODO improve text field on error expansion
+          if (_validator?.validate(val) != null) {
+            setState(() {
+              _height = 70;
+            });
+          }
+          else {
+            _height = widget.height;
+          }
           return _validator?.validate(val);
         },
       ),

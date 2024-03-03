@@ -19,13 +19,14 @@ class StorageService {
   }
 
   // put image to storage
-  // TODO: complete uploadImage function and implement it
-  void uploadImage(String path) async {
+  // TODO: handle on task upload process
+  Future<String> uploadImage(String path, String uid, {String dir = "profile"}) async {
     File file = File(path);
     String fileName = file.uri.pathSegments.last;
-    Reference fileReference = getDirectoryOf("profile").child(fileName);
+    Reference fileReference = getDirectoryOf(dir).child("$uid/$fileName");
+    fileReference.putFile(file);
 
-    // fileReference.putFile(file);
+    return fileReference.fullPath.replaceAll("images", "");
   }
 
   // get image from storage

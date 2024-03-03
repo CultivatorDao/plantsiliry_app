@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:file_picker/file_picker.dart';
+
 import 'package:plantsility_app/services/database.dart';
+import 'package:plantsility_app/services/storage.dart';
 
 import 'package:provider/provider.dart';
 import 'package:plantsility_app/models/user.dart';
@@ -9,6 +12,8 @@ import 'package:plantsility_app/widgets/buttons/rounded_rect_button.dart';
 import 'package:plantsility_app/widgets/text_fields/custom_text_field.dart';
 import 'package:plantsility_app/activities/main/profile/circle_avatar_custom.dart';
 import 'package:plantsility_app/widgets/loading/chasing_dots_loading.dart';
+
+import 'dart:io';
 
 
 class SettingScreen extends StatefulWidget {
@@ -24,10 +29,37 @@ class _SettingScreenState extends State<SettingScreen> {
 
   // form values
   String? _firstName;
+  String? _profilePhoto;
   String? _lastName;
   String? _username;
   String? _email;
   String? _phoneNumber;
+
+
+  // change displayed image if you chose via file picker return image from device
+  // if image not chosen then return image from DB return image from Firebase Storage
+  Widget setProfileImage(userData) {
+    if (_profilePhoto != null) {
+      File image = File(_profilePhoto!);
+      // TODO: create better image displaying widget
+      return Material(
+        shape: const CircleBorder(),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: InkWell(
+          child: Image.file(
+            image,
+            height: 130,
+            width: 130,
+            fit: BoxFit.cover,
+          )
+        )
+      );
+    }
+    else {
+      return CircleAvatarCustom(src: userData.profilePhoto, radius: 65,);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +67,13 @@ class _SettingScreenState extends State<SettingScreen> {
     // user model to provide uid for Database Service
     final user = Provider.of<UserModel>(context);
 
-
     return StreamBuilder(
       stream: DatabaseService(uid: user.uid).userData,
       initialData: null,
       builder: (context, snapshot) {
         UserDataModel? userData = snapshot.data;
         if (userData != null) {
+          debugPrint(userData.profilePhoto);
           return Scaffold(
             appBar: AppBar(
               title: Text(
@@ -55,12 +87,18 @@ class _SettingScreenState extends State<SettingScreen> {
             body: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  const CircleAvatarCustom(
-                    src: "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg",
-                    radius: 65,
-                  ),
+                  setProfileImage(userData),
+
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      FilePickerResult? result = await FilePicker.platform.pickFiles(
+                        type: FileType.custom,
+                        allowedExtensions: ['jpg', 'png'],
+                      );
+                        setState(() {
+                          _profilePhoto = result?.files.single.path!;
+                        });
+                    },
                     child: Text(
                       "Change Picture",
                       style: Theme.of(context).textTheme.displaySmall!.copyWith(
@@ -153,9 +191,16 @@ class _SettingScreenState extends State<SettingScreen> {
                                 width: 283,
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()){
+
+                                    String? profilePhoto;
+                                    if (_profilePhoto != null) {
+                                      profilePhoto = await StorageService().uploadImage(_profilePhoto!, user.uid);
+                                    }
+
                                     // creating user data model object to provide it to updateUserData method
                                     UserDataModel userDataModel = UserDataModel(
                                       username: _username ?? userData.username,
+                                      profilePhoto: profilePhoto ?? userData.profilePhoto,
                                       firstName: _firstName ?? userData.firstName,
                                       lastName: _lastName ?? userData.lastName,
                                       email: _email ?? userData.email,

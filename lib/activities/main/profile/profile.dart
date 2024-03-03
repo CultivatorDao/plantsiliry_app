@@ -41,8 +41,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               body: Column(
                 children: <Widget>[
                   // TODO: create circle image widget with border
-                  const CircleAvatarCustom(
-                    src: "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg",
+                  // TODO: bug, when changed image via file picker, displayed image doesn't change
+                  CircleAvatarCustom(
+                    src: "${userData.profilePhoto}",
                     radius: 36,
                   ),
 

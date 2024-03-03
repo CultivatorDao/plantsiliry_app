@@ -14,6 +14,7 @@ class UserDataModel {
   /// Custom user data model, contains all user information.
 
   final String? username;
+  final String? profilePhoto;
   final String? firstName;
   final String? lastName;
   final String? email;
@@ -22,6 +23,7 @@ class UserDataModel {
 
   UserDataModel({
     this.username = "no_one_knows",
+    this.profilePhoto = "placeholder.png",
     this.firstName = "No-one",
     this.lastName = "Knows",
     this.email = "knows@mail.com",
