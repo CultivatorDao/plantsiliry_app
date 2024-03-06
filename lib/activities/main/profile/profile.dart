@@ -37,123 +37,126 @@ class _ProfileScreenState extends State<ProfileScreen> {
         UserDataModel? userData = snapshot.data;
         if (userData != null) {
           return Scaffold(
-              appBar: AppBar(),
-              body: Column(
-                children: <Widget>[
-                  // TODO: create circle image widget with border
-                  // TODO: bug, when changed image via file picker, displayed image doesn't change
-                  CircleAvatarCustom(
-                    src: "${userData.profilePhoto}",
-                    radius: 36,
-                  ),
+              body: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    const Padding(padding: EdgeInsets.only(top: 40)),
 
-                  Text(
-                    "${userData.firstName} ${userData.lastName}",
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      fontSize: 18
+                    // TODO: create circle image widget with border
+                    // TODO: bug, when changed image via file picker, displayed image doesn't change
+                    CircleAvatarCustom(
+                      src: "${userData.profilePhoto}",
+                      radius: 36,
                     ),
-                  ),
-
-                  SizedBox(
-                    height: 30,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingScreen()));
-                      },
-                      style: TextButton.styleFrom(
+                
+                    Text(
+                      "${userData.firstName} ${userData.lastName}",
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        fontSize: 18
                       ),
-                      child: Text(
-                        "Edit profile",
-                        style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                          fontSize: 12
-                        ),
-                      )
                     ),
-                  ),
-
-                  const Padding(padding: EdgeInsets.only(bottom: 20)),
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      const Label(text: "Profile info"),
-
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
-                        child: Column(
-                          children: <Widget>[
-                            InformationLine(label: "Username", value: userData.username.toString()),
-                            const Padding(padding: EdgeInsets.only(bottom: 18)),
-                            InformationLine(label: "Email", value: userData.email.toString()),
-                            const Padding(padding: EdgeInsets.only(bottom: 18)),
-                            InformationLine(label: "Phone number", value: userData.phoneNumber.toString()),
-                          ],
+                
+                    SizedBox(
+                      height: 30,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingScreen()));
+                        },
+                        style: TextButton.styleFrom(
                         ),
+                        child: Text(
+                          "Edit profile",
+                          style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                            fontSize: 12
+                          ),
+                        )
                       ),
-                      
-                      const Label(text: "Content"),
-
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
-                        child: Column(
-                          children: <Widget>[
-                            LineButton(
-                              text: "Favorite",
-                              leftIcon: Icons.favorite_border,
-                              onTap: () {debugPrint("checl");},
-                            ),
-                            const Padding(padding: EdgeInsets.only(bottom: 9)),
-                            LineButton(
-                              text: "My pots",
-                              leftIcon: Icons.file_download_outlined,
-                              onTap: () {}
-                            ),
-                          ],
+                    ),
+                
+                    const Padding(padding: EdgeInsets.only(bottom: 20)),
+                
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Label(text: "Profile info"),
+                
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
+                          child: Column(
+                            children: <Widget>[
+                              InformationLine(label: "Username", value: userData.username.toString()),
+                              const Padding(padding: EdgeInsets.only(bottom: 18)),
+                              InformationLine(label: "Email", value: userData.email.toString()),
+                              const Padding(padding: EdgeInsets.only(bottom: 18)),
+                              InformationLine(label: "Phone number", value: userData.phoneNumber.toString()),
+                            ],
+                          ),
                         ),
-                      ),
-                      
-                      const Label(text: "Preferences"),
-
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
-                        child: Column(
-                          children: <Widget>[
-                            LineButton(
-                              text: "Language",
-                              leftIcon: Icons.translate_outlined,
-                              onTap: () {}
-                            ),
-                            const Padding(padding: EdgeInsets.only(bottom: 9)),
-                            LineButton(
-                              text: "Dark mode",
-                              leftIcon: Icons.dark_mode_outlined,
-                              onTap: () {}
-                            ),
-                          ],
+                        
+                        const Label(text: "Content"),
+                
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
+                          child: Column(
+                            children: <Widget>[
+                              LineButton(
+                                text: "Favorite",
+                                leftIcon: Icons.favorite_border,
+                                onTap: () {debugPrint("checl");},
+                              ),
+                              const Padding(padding: EdgeInsets.only(bottom: 9)),
+                              LineButton(
+                                text: "My pots",
+                                leftIcon: Icons.file_download_outlined,
+                                onTap: () {}
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-
-                      const Label(text: "Account"),
-
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
-                        child: Column(
-                          children: <Widget>[
-                            LineButton(
-                              text: "Log Out",
-                              leftIcon: Icons.logout_outlined,
-                              onTap: () {
-                                _auth.signOut();
-                              }
-                            )
-                          ],
+                        
+                        const Label(text: "Preferences"),
+                
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
+                          child: Column(
+                            children: <Widget>[
+                              LineButton(
+                                text: "Language",
+                                leftIcon: Icons.translate_outlined,
+                                onTap: () {}
+                              ),
+                              const Padding(padding: EdgeInsets.only(bottom: 9)),
+                              LineButton(
+                                text: "Dark mode",
+                                leftIcon: Icons.dark_mode_outlined,
+                                onTap: () {}
+                              ),
+                            ],
+                          ),
                         ),
-                      )
-
-                    ],
-                  )
-
-                ],
+                
+                        const Label(text: "Account"),
+                
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
+                          child: Column(
+                            children: <Widget>[
+                              LineButton(
+                                text: "Log Out",
+                                leftIcon: Icons.logout_outlined,
+                                onTap: () {
+                                  _auth.signOut();
+                                },
+                              ),
+                            ],
+                          ),
+                        )
+                
+                      ],
+                    )
+                
+                  ],
+                ),
               )
           );
         }

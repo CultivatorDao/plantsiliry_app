@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 
 import 'package:plantsility_app/services/database.dart';
 import 'package:plantsility_app/services/storage.dart';
+import 'package:plantsility_app/widgets/validator/validator.dart';
 
 import 'package:provider/provider.dart';
 import 'package:plantsility_app/models/user.dart';
@@ -34,6 +35,12 @@ class _SettingScreenState extends State<SettingScreen> {
   String? _username;
   String? _email;
   String? _phoneNumber;
+
+
+  final Validator _validator = Validator(
+    minLength: 3,
+    onLengthErrorHelperMessage: "Must be at least 3 characters"
+  );
 
 
   // change displayed image if you chose via file picker return image from device
@@ -124,6 +131,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               height: 40,
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                               fontSize: 12,
+                              validator: _validator,
                               onChanged: (val) {
                                 setState(() {
                                   _firstName = val;
@@ -137,6 +145,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               height: 40,
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                               fontSize: 12,
+                              validator: _validator,
                               onChanged: (val) {
                                 setState(() {
                                   _lastName = val;
@@ -150,6 +159,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               height: 40,
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                               fontSize: 12,
+                              validator: _validator,
                               onChanged: (val) {
                                 setState(() {
                                   _username = val;
@@ -163,6 +173,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               height: 40,
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                               fontSize: 12,
+                              validator: Validator(isEmail: true),
                               onChanged: (val) {
                                 setState(() {
                                   _email = val;
