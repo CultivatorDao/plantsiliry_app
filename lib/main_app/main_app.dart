@@ -38,10 +38,11 @@ class _PlantsilityState extends State<Plantsility> {
 
   @override
   Widget build(BuildContext context) {
-    // wrap main app in StreamProvider to get access to user object throughout child widgets
+    final authService = Provider.of<AuthService>(context);
+    
     return StreamProvider<UserModel?>.value(
       initialData: null,
-      value: AuthService().user,
+      value: authService.user,
       child: MaterialApp(
         title: "Plantsility",
         // TODO Add themes

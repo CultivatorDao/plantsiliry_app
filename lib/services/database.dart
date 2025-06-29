@@ -65,7 +65,7 @@ class DatabaseService {
         return PlantModel(
           name: doc.get("name"),
           category: doc.get("category"),
-          frontImage: "placeholder.png"
+          frontImage: doc.get("image"),
         );
       }
     ).toList();
